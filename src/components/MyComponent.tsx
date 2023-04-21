@@ -5,6 +5,7 @@ import { updateUserName, updateUserEmail } from '@/store/actions';
 import { RootState, UserState } from '@/store/store.interface';
 import { selectUserName, selectUserEmail } from '@/store/selectors';
 import { ReactElement } from 'react';
+import { TextField } from '@mui/material';
 
 interface Props {
   user: UserState;
@@ -13,18 +14,29 @@ interface Props {
 }
 
 function MyComponent({ user, updateUserName, updateUserEmail }: Props): ReactElement {
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     updateUserName(event.target.value);
   };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     updateUserEmail(event.target.value);
   };
 
   return (
     <div>
-      <input type="text" value={user.name} onChange={handleNameChange} />
-      <input type="email" value={user.email} onChange={handleEmailChange} />
+      <TextField
+        label="Username"
+        variant="outlined"
+        value={user.name}
+        onChange={handleNameChange}
+      />
+      <TextField
+        label="Email"
+        type="email"
+        variant="outlined"
+        value={user.email}
+        onChange={handleEmailChange}
+      />
     </div>
   );
 }

@@ -5,49 +5,82 @@ const album: string[] = [
   'https://cms-public-artifacts.artlist.io/content/music/aac/746097_741967_Cedric_Simon_-_JazzifiBeats_-_AO-000827_-_Master_V2_-_96_Bpm_-_210822_-_BOV_-_ORG_-_2444.aac',
 ];
 
-const BackgroundAudio = () => {
-  const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [userHasInteracted, setUserHasInteracted] = useState(false);
-  const audioRef = useRef(null);
+const BackgroundAudio: React.FC = () => {
+  const [volume, setVolume] = useState(0.5);
+  const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
+  const [userHasInteracted, setUserHasInteracted] = useState<boolean>(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    if (userHasInteracted) {
-      const audio = new Audio(album[currentSongIndex]);
-      audio.volume = 0.5;
-      audioRef.current = audio;
-      audio.addEventListener('ended', () => {
-        setCurrentSongIndex((currentSongIndex + 1) % album.length);
-        const newAudio = new Audio(album[currentSongIndex]);
-        newAudio.volume = 0.5;
-        audioRef.current = newAudio;
-        newAudio.play();
-      });
-      audio.play();
-      return () => {
-        if (audioRef.current) {
-          audioRef.current.pause();
-          audioRef.current.currentTime = 0;
-        }
-      };
-    }
-  }, [currentSongIndex, userHasInteracted, album]);
+    let isMounted = true;
 
-  const handleUserInteraction = () => {
+    try {
+      if (userHasInteracted) {
+        const audio = new Audio(album[currentSongIndex]);
+        audio.volume = volume;
+        audioRef.current = audio;
+        audio.addEventListener('ended', () => {
+          if (isMounted) {
+            setCurrentSongIndex((currentSongIndex + 1) % album.length);
+            const newAudio = new Audio(album[currentSongIndex]);
+            newAudio.volume = volume;
+            audioRef.current = newAudio;
+            newAudio.play().catch((e) => {
+              throw e;
+            });
+          }
+        });
+        audio.play();
+      }
+    } catch (e) {
+      console.log('this is error', e);
+    }
+
+    return () => {
+      isMounted = false;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    };
+  }, [currentSongIndex, userHasInteracted, volume, album]);
+
+  const handleUserInteraction = (): void => {
     setUserHasInteracted(true);
   };
 
-  const handleVolumeChange = (event) => {
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const newVolume = Number(event.target.value);
+    setVolume(newVolume);
     if (audioRef.current) {
       audioRef.current.volume = newVolume;
     }
   };
 
-  const handlePlayNext = () => {
+  const handlePlayNext = (): void => {
     setCurrentSongIndex((currentSongIndex + 1) % album.length);
+  };
+
+  const handlePlay = (): void => {
     const audio = audioRef.current;
-    audio.src = album[currentSongIndex];
-    audio.play();
+    if (audio && audio.paused) {
+      audio.play();
+    }
+  };
+
+  const handlePause = (): void => {
+    const audio = audioRef.current;
+    if (audio && !audio.paused) {
+      audio.pause();
+    }
+  };
+
+  const handleStop = (): void => {
+    const audio = audioRef.current;
+    if (audio && !audio.paused) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
   };
 
   return (
@@ -60,10 +93,14 @@ const BackgroundAudio = () => {
             min="0"
             max="1"
             step="0.01"
-            defaultValue="0.5"
+            value={volume}
             onChange={handleVolumeChange}
           />
+
           <button onClick={handlePlayNext}>Play Next</button>
+          <button onClick={handlePlay}>Play</button>
+          <button onClick={handlePause}>Pause</button>
+          <button onClick={handleStop}>Stop</button>
         </>
       )}
     </div>

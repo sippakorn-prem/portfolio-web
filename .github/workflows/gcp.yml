@@ -70,6 +70,7 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.GCP_REGION }}
-          image: ${{ env.GCR_HOSTNAME }}/${{ env.GCR_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
+          # image: ${{ env.GCR_HOSTNAME }}/${{ env.GCR_PROJECT_ID }}/${{ env.IMAGE_NAME }}:latest
+          image: asia.gcr.io/portfolio-383520/sippakorn-prem/portfolio-web:latest
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}

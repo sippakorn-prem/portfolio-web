@@ -18,13 +18,22 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
+    # - id: 'auth'
+    #   uses: 'google-github-actions/auth@v1'
+    #   with:
+    #     credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+    #     project_id: ${{ env.GCR_PROJECT_ID }}
+
+    # - name: 'Set up Cloud SDK'
+    #   uses: 'google-github-actions/setup-gcloud@v1.1.0'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+    - uses: google-github-actions/setup-gcloud@v1.1.0
       with:
-        credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
+        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         project_id: ${{ env.GCR_PROJECT_ID }}
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1.1.0'
+        export_default_credentials: true
 
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .

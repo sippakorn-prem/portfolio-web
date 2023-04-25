@@ -27,8 +27,8 @@ jobs:
     - name: Check gcloud CLI
       run: |
         gcloud info
-    - name: Build Docker Image
-      run: docker build -t $IMAGE_NAME:latest .
+    # - name: Build Docker Image
+    #   run: docker build -t $IMAGE_NAME:latest .
     - name: Automatic Tagging of Releases
       id: increment-git-tag
       run: |
@@ -38,14 +38,14 @@ jobs:
     - name: Configure Docker Client
       run: |-
         gcloud auth configure-docker --quiet
-    - name: Push Docker Image to Container Registry (GCR)
-      env:
-        GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
-      run: |-
-        docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-        docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-        docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-        docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+    # - name: Push Docker Image to Container Registry (GCR)
+    #   env:
+    #     GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+    #   run: |-
+    #     docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+    #     docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+    #     docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+    #     docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
     # - name: Push Docker Image to Artifact Registry
     #   env:
     #     GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}

@@ -13,7 +13,8 @@ done
 
 # get highest tag number, and add v0.1.0 if doesn't exist
 git fetch --prune --unshallow 2>/dev/null
-CURRENT_VERSION=`git -c $AUTHORIZATION describe --abbrev=0 --tags 2>/dev/null`
+CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
+# CURRENT_VERSION=`git -c $AUTHORIZATION describe --abbrev=0 --tags 2>/dev/null`
 
 if [[ $CURRENT_VERSION == '' ]]
 then
@@ -51,16 +52,16 @@ echo "($VERSION) updating $CURRENT_VERSION to $NEW_TAG"
 GIT_COMMIT=`git rev-parse HEAD`
 NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 
-# only tag if no tag already
-# if [ -z "$NEEDS_TAG" ]; then
-#   echo "Tagged with $NEW_TAG"
-#   git tag $NEW_TAG
-#   git push --tags
-#   git push
-# else
-#   echo "Already a tag on this commit"
-# fi
+only tag if no tag already
+if [ -z "$NEEDS_TAG" ]; then
+  echo "Tagged with $NEW_TAG"
+  git tag $NEW_TAG
+  git push --tags
+  git push
+else
+  echo "Already a tag on this commit"
+fi
 
-echo ::set-output name=git-tag::$NEW_TAG
+echo ::save-state name=git-tag::$NEW_TAG
 
 exit 0

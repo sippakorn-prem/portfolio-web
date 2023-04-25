@@ -1,0 +1,39 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ github.repository }}
+      GCR_PROJECT_ID: ${{ secrets.GCR_PROJECT_ID }}
+      GCR_SERVICE_ACCOUNT_KEY: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: '357.0.0'
+          project_id: ${{ env.GCR_PROJECT_ID }}
+          service_account_key: ${{ env.GCR_SERVICE_ACCOUNT_KEY }}
+      
+      - name: Log in to Google Container Registry
+        run: gcloud auth configure-docker
+
+      - name: Build and push Docker image
+        run: |
+          echo ${GCR_PROJECT_ID}
+          echo ${GCR_SERVICE_ACCOUNT_KEY}
+          echo $(date +%s)
+          echo ${IMAGE_NAME}
+          # docker-compose build --build-arg GCR_PROJECT_ID=${GCR_PROJECT_ID} --build-arg GCR_SERVICE_ACCOUNT_KEY_JSON="${GCR_SERVICE_ACCOUNT_KEY}" --build-arg BUILD_VERSION=$(date +%s) app
+          # IMAGE_TAG=$(date +%s)
+          # docker tag app:latest gcr.io/${GCR_PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}
+          # docker push gcr.io/${GCR_PROJECT_ID}/${IMAGE_NAME}:${IMAGE_TAG}

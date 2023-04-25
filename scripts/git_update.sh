@@ -60,6 +60,6 @@ else
   echo "Already a tag on this commit"
 fi
 
-echo "git-tag=$NEW_TAG" >> $GITHUB_OUTPUT
+echo "GIT_TAG=$NEW_TAG" >> $GITHUB_OUTPUT
 
 exit 0

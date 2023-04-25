@@ -54,9 +54,9 @@ NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 # only tag if no tag already
 if [ -z "$NEEDS_TAG" ]; then
   echo "Tagged with $NEW_TAG"
-  git -c $AUTHORIZATION tag $NEW_TAG
-  git -c $AUTHORIZATION push --tags
-  git -c $AUTHORIZATION push
+  git tag $NEW_TAG
+  git push --tags
+  git push
 else
   echo "Already a tag on this commit"
 fi

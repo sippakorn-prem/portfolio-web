@@ -1,6 +1,7 @@
 #!/bin/bash
 
 VERSION=""
+AUTHORIZATION="http.extraHeader=AUTHORIZATION: Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}"
 
 # get parameters
 while getopts v: flag
@@ -12,7 +13,7 @@ done
 
 # get highest tag number, and add v0.1.0 if doesn't exist
 git fetch --prune --unshallow 2>/dev/null
-CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
+CURRENT_VERSION=`git -c $AUTHORIZATION describe --abbrev=0 --tags 2>/dev/null`
 
 if [[ $CURRENT_VERSION == '' ]]
 then
@@ -53,9 +54,9 @@ NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 # only tag if no tag already
 if [ -z "$NEEDS_TAG" ]; then
   echo "Tagged with $NEW_TAG"
-  git tag $NEW_TAG
-  git push --tags
-  git push
+  git -c $AUTHORIZATION tag $NEW_TAG
+  git -c $AUTHORIZATION push --tags
+  git -c $AUTHORIZATION push
 else
   echo "Already a tag on this commit"
 fi

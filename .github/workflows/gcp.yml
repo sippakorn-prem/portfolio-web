@@ -42,15 +42,7 @@ jobs:
       env:
         GIT_TAG: ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
       run: |-
-        echo ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
-        echo ${{ env.GIT_TAG }}
-        # docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-        # docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-        # docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-        # docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-    # - name: Push Docker Image to Artifact Registry
-    #   run: |-
-    #     docker tag $IMAGE_NAME:latest asia-southeast2-docker.pkg.dev/$GCR_PROJECT_ID/images/$IMAGE_NAME:latest
-    #     docker tag $IMAGE_NAME:latest asia-southeast2-docker.pkg.dev/$GCR_PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
-    #     docker push asia-southeast2-docker.pkg.dev/$GCR_PROJECT_ID/images/$IMAGE_NAME:latest
-    #     docker push asia-southeast2-docker.pkg.dev/$GCR_PROJECT_ID/images/$IMAGE_NAME:$GIT_TAG
+        docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+        docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+        docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+        docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG

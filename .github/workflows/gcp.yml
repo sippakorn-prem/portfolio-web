@@ -43,8 +43,8 @@ jobs:
     #   id: increment-git-tag
     #   run: |
     #     bash ./scripts/git_update.sh -v major
-    - name: Login to gcloud
-      run: gcloud auth login
+    # - name: Login to gcloud
+    #   run: gcloud auth login
     - name: Configure Docker Client
       run: |-
         gcloud auth configure-docker --quiet

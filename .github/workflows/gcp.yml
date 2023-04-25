@@ -53,6 +53,12 @@ jobs:
     # needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - id: 'auth'
+        uses: google-github-actions/auth@v1.1.0
+        with:
+          credentials_json: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v1.0.1

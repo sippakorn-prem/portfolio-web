@@ -60,10 +60,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: |-
+      - name: Get service name
+        id: SERVICE_NAME
+        run: |-
           # echo ::set-env name=GHA_BRANCH::$(echo $GITHUB_REF | awk -F / '{print $3}')
-          echo "GHA_BRANCH=$(echo $GITHUB_REF | awk -F / '{print $3}')" >> $GITHUB_OUTPUT
+          echo "SERVICE_NAME=$(echo $GITHUB_REF | awk -F / '{print $3}')" >> $GITHUB_OUTPUT
         shell: bash
+      - name: Check SERVICE_NAME
+        env:
+          SERVICE_NAME: ${{ steps.SERVICE_NAME.outputs.SERVICE_NAME }}
+        run: |-
+          echo $SERVICE_NAME
       # - id: 'auth'
       #   uses: google-github-actions/auth@v1.1.0
       #   with:

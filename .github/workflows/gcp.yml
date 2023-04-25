@@ -34,8 +34,8 @@ jobs:
         export_default_credentials: true
     - name: Check gcloud CLI and Auth
       run: |
-        gcloud info
-        gcloud auth list
+        # gcloud info
+        gcloud config list account --format "value(core.account)"
 
     # - name: Build Docker Image
     #   run: docker build -t $IMAGE_NAME:latest .

@@ -11,56 +11,54 @@ env:
   GCR_PROJECT_ID: ${{ secrets.GCR_PROJECT_ID }}
   GCR_HOSTNAME: ${{ secrets.GCR_HOSTNAME }}
   GCR_SERVICE_ACCOUNT_KEY: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
+  GCP_REGION: ${{ secrets.GCP_REGION }}
 
 jobs:
-  build:
-    name: Build and Push to GCP
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - id: 'auth'
-      uses: google-github-actions/auth@v1.1.0
-      with:
-        credentials_json: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1.1.0
-    - name: Check gcloud CLI
-      run: |
-        gcloud info
-    # - name: Build Docker Image
-    #   run: docker build -t $IMAGE_NAME:latest .
-    - name: Automatic Tagging of Releases
-      id: INCREMENT_GIT_TAG
-      run: |
-        bash ./scripts/git_update.sh -v patch
-    - name: Check Tag Version
-      run: echo ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
-    # - name: Configure Docker Client
-    #   run: |-
-    #     gcloud auth configure-docker --quiet
-    # - name: Push Docker Image to Container Registry (GCR)
-    #   env:
-    #     GIT_TAG: ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
-    #   run: |-
-    #     docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-    #     docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-    #     docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-    #     docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+  # build:
+  #   name: Build and Push to GCP
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v3
+  #   - id: 'auth'
+  #     uses: google-github-actions/auth@v1.1.0
+  #     with:
+  #       credentials_json: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
+  #   - name: Set up Cloud SDK
+  #     uses: google-github-actions/setup-gcloud@v1.1.0
+  #   - name: Check gcloud CLI
+  #     run: |
+  #       gcloud info
+  #   - name: Build Docker Image
+  #     run: docker build -t $IMAGE_NAME:latest .
+  #   - name: Automatic Tagging of Releases
+  #     id: INCREMENT_GIT_TAG
+  #     run: |
+  #       bash ./scripts/git_update.sh -v patch
+  #   - name: Check Tag Version
+  #     run: echo ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
+  #   - name: Configure Docker Client
+  #     run: |-
+  #       gcloud auth configure-docker --quiet
+  #   - name: Push Docker Image to Container Registry (GCR)
+  #     env:
+  #       GIT_TAG: ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
+  #     run: |-
+  #       docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+  #       docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+  #       docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+  #       docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
   deploy:
     name: Deploy to GCP
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Cloud Run
         id: deploy
-        run: |-
-          echo $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-        # uses: google-github-actions/deploy-cloudrun@v0
-        # with:
-        #   service: ${{ env.SERVICE }}
-        #   region: ${{ env.REGION }}
-        #   # NOTE: If using a pre-built image, update the image name here
-        #   image: ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
-      # - name: Show Output
-      #   run: echo ${{ steps.deploy.outputs.url }}
+        uses: google-github-actions/deploy-cloudrun@v1.0.1
+        with:
+          service: ${{ env.IMAGE_NAME }}
+          region: ${{ env.GCP_REGION }}
+          image: $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+      - name: Show Output
+        run: echo ${{ steps.deploy.outputs.url }}

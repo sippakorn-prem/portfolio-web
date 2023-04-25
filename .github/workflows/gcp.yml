@@ -17,12 +17,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
-        with:
-          version: '357.0.0'
-          project_id: ${{ env.GCR_PROJECT_ID }}
-          service_account_key: ${{ env.GCR_SERVICE_ACCOUNT_KEY }}
+      - name: Authenticate with Google Cloud
+        run: |
+          echo "${GCR_SERVICE_ACCOUNT_KEY}" | base64 -d > /tmp/gcp-key.json
+          gcloud auth activate-service-account --key-file=/tmp/gcp-key.json
+          gcloud auth configure-docker
       
       - name: Log in to Google Container Registry
         run: gcloud auth configure-docker

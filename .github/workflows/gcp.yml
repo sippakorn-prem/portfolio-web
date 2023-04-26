@@ -14,43 +14,43 @@ env:
   GCP_REGION: ${{ secrets.GCP_REGION }}
 
 jobs:
-  # build:
-  #   name: Build and Push to GCP
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #   - id: 'auth'
-  #     uses: google-github-actions/auth@v1.1.0
-  #     with:
-  #       credentials_json: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
-  #   - name: Set up Cloud SDK
-  #     uses: google-github-actions/setup-gcloud@v1.1.0
-  #   - name: Check gcloud CLI
-  #     run: |
-  #       gcloud info
-  #   - name: Build Docker Image
-  #     run: docker build -t $IMAGE_NAME:latest .
-  #   - name: Automatic Tagging of Releases
-  #     id: INCREMENT_GIT_TAG
-  #     run: |
-  #       bash ./scripts/git_update.sh -v patch
-  #   - name: Check Tag Version
-  #     run: echo ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
-  #   - name: Configure Docker Client
-  #     run: |-
-  #       gcloud auth configure-docker --quiet
-  #   - name: Push Docker Image to Container Registry (GCR)
-  #     env:
-  #       GIT_TAG: ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
-  #     run: |-
-  #       docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-  #       docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-  #       docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
-  #       docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+  build:
+    name: Build and Push to GCP
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - id: 'auth'
+      uses: google-github-actions/auth@v1.1.0
+      with:
+        credentials_json: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1.1.0
+    - name: Check gcloud CLI
+      run: |
+        gcloud info
+    - name: Build Docker Image
+      run: docker build -t $IMAGE_NAME:latest .
+    - name: Automatic Tagging of Releases
+      id: INCREMENT_GIT_TAG
+      run: |
+        bash ./scripts/git_update.sh -v patch
+    - name: Check Tag Version
+      run: echo ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
+    - name: Configure Docker Client
+      run: |-
+        gcloud auth configure-docker --quiet
+    - name: Push Docker Image to Container Registry (GCR)
+      env:
+        GIT_TAG: ${{ steps.INCREMENT_GIT_TAG.outputs.GIT_TAG }}
+      run: |-
+        docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+        docker tag $IMAGE_NAME:latest $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+        docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:latest
+        docker push $GCR_HOSTNAME/$GCR_PROJECT_ID/$IMAGE_NAME:$GIT_TAG
   deploy:
     name: Deploy to GCP
-    # needs: build
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Get service name

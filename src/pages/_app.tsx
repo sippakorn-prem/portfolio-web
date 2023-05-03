@@ -3,6 +3,7 @@
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import store from '@/store/store';
+import '@/styles/reset.css';
 import { ReactElement } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {

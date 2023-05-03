@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: ['./src'],
-    prependData: `@use 'globals' as *;`,
+    prependData: `@use 'variables' as *;`,
   },
 }
 

@@ -3,10 +3,11 @@
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import { ReactElement, useEffect } from 'react';
+import Head from 'next/head';
 import store from '@/store/store';
 import '@/styles/reset.css';
 import '@/styles/theme.css';
-import Head from 'next/head';
+import '@/styles/components/Background.css';
 
 function displayAsciiArtInConsole(): void {
   const asciiArt = `

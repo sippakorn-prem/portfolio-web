@@ -39,8 +39,23 @@ export default function Meta({
   );
 }
 
+const defaultKeywords = [
+  // en
+  'Sippakorn Suphapinyo',
+  'Sippakorn',
+  'Suphapinyo',
+  'Prem',
+  'sippakorn-prem',
+
+  //th
+  'สิปปกร ศุภภิญโญ',
+  'สิปปกร',
+  'ศุภภิญโญ',
+  'เปรม',
+];
+
 Meta.defaultProps = {
-  keywords: 'Sippakorn Suphapinyo, Sippakorn, Suphapinyo, Prem, sippakorn-prem',
+  keywords: defaultKeywords.join(','),
   description: 'I am Sippakorn Suphapinyo (Prem)',
   ogTitle: 'Prem Sippakorn',
   ogDescription: 'I am Sippakorn Suphapinyo (Prem)',

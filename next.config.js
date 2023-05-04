@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 
+const path = require('path')
 const withPWA = require('next-pwa')({
   dest: "public",
   register: true,
@@ -10,7 +11,7 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    includePaths: ['./src'],
+    includePaths: ['./src', path.join(__dirname, 'styles')],
     prependData: `@use 'variables' as *;`,
   },
 }

@@ -29,6 +29,7 @@ export default function Meta({
     <>
       <meta name="keywords" content={keywords} />
       <meta name="description" content={description} />
+
       <meta property="og:title" content={ogTitle} />
       <meta property="og:description" content={ogDescription} />
       <meta property="og:url" content={ogUrl} />
@@ -39,7 +40,7 @@ export default function Meta({
 }
 
 Meta.defaultProps = {
-  keywords: 'Sippakorn, Suphapinyo, Prem',
+  keywords: 'Sippakorn Suphapinyo, Sippakorn, Suphapinyo, Prem, sippakorn-prem',
   description: 'I am Sippakorn Suphapinyo (Prem)',
   ogTitle: 'Prem Sippakorn',
   ogDescription: 'I am Sippakorn Suphapinyo (Prem)',

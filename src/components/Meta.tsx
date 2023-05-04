@@ -56,9 +56,9 @@ const defaultKeywords = [
 
 Meta.defaultProps = {
   keywords: defaultKeywords.join(','),
-  description: 'I am Sippakorn Suphapinyo (Prem)',
+  description: "I'm Sippakorn Suphapinyo (Prem)",
   ogTitle: 'Prem Sippakorn',
-  ogDescription: 'I am Sippakorn Suphapinyo (Prem)',
+  ogDescription: "I'm Sippakorn Suphapinyo (Prem)",
   ogUrl: 'https://sippakorn.page/',
   ogImage: '/og-image.png',
 };

@@ -6,6 +6,7 @@ const album: string[] = [
 ];
 
 const BackgroundAudio: React.FC = () => {
+  const timer: NodeJS.Timeout | null = null;
   const [volume, setVolume] = useState(0.5);
   const [currentSongIndex, setCurrentSongIndex] = useState<number>(0);
   const [userHasInteracted, setUserHasInteracted] = useState<boolean>(false);
@@ -17,6 +18,7 @@ const BackgroundAudio: React.FC = () => {
     try {
       if (userHasInteracted) {
         const audio = new Audio(album[currentSongIndex]);
+        console.log(audio);
         audio.volume = volume;
         audioRef.current = audio;
         audio.addEventListener('ended', () => {
@@ -44,6 +46,15 @@ const BackgroundAudio: React.FC = () => {
       }
     };
   }, [currentSongIndex, userHasInteracted, volume, album]);
+
+  // useEffect(() => {
+  //   const timer = setInterval(getAudioPlaybackTime, 1000);
+  //   return () => clearInterval(timer);
+  // }, []);
+
+  // function getAudioPlaybackTime(): void {
+  //   console.log(audioRef?.current?.currentTime);
+  // }
 
   const handleUserInteraction = (): void => {
     setUserHasInteracted(true);

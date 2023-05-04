@@ -1,7 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import { ReactElement } from 'react';
 import Meta from '@/components/Meta';
-import Background from '@/components/Background';
 
 export default function Document(): ReactElement {
   return (
@@ -11,7 +10,6 @@ export default function Document(): ReactElement {
         <link rel="manifest" href="/manifest.json" />
         {[16, 24, 32, 48, 64, 96, 128, 256, 512].map(LinkIcon)}
       </Head>
-      <Background />
       <body className="body-container">
         <Main />
         <NextScript />

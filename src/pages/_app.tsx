@@ -7,7 +7,8 @@ import Head from 'next/head';
 import store from '@/store/store';
 import '@/styles/reset.css';
 import '@/styles/theme.css';
-import '@/styles/components/Background.css';
+import BackgroundAudio from '@/components/BackgroundAudio';
+import Background from '@/components/Background';
 
 function displayAsciiArtInConsole(): void {
   const asciiArt = `
@@ -40,6 +41,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
         <meta name="author" content="@sippakorn-prem" />
         <meta name="theme-color" content="#212121" media="(prefers-color-scheme: dark)" />
       </Head>
+      <Background />
       <Component {...pageProps} />
     </Provider>
   );

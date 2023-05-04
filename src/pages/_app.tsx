@@ -12,7 +12,14 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <Provider store={store}>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="UTF-8" />
+        <meta
+          name="viewport"
+          content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="author" content="@sippakorn-prem" />
+        <meta name="theme-color" content="#212121" media="(prefers-color-scheme: dark)" />
       </Head>
       <Component {...pageProps} />
     </Provider>

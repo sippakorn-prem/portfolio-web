@@ -1,24 +1,24 @@
 import Head from 'next/head';
 import { ReactElement } from 'react';
+import Meta, { IMetaProps } from './Meta';
 
-interface ILayoutProps {
-  children?: ReactElement | ReactElement[];
+interface Props extends IMetaProps {
   title?: string;
-  description?: string;
+  children?: ReactElement | ReactElement[];
 }
 
-export default function Layout({
-  children,
-  title = 'Sippakorn.page',
-  description = 'I am Sippakorn Suphapinyo (Prem)',
-}: ILayoutProps): ReactElement {
+export default function Layout(props: Props): ReactElement {
   return (
     <>
       <Head>
-        <meta name="description" content={description} />
-        <title>{title}</title>
+        <Meta {...props} />
+        <title>{props.title}</title>
       </Head>
-      <main>{children}</main>
+      <main>{props.children}</main>
     </>
   );
 }
+
+Layout.defaultProps = {
+  title: 'Sippakorn.page',
+};

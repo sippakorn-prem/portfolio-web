@@ -2,9 +2,10 @@
 
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
+import { ReactElement } from 'react';
 import store from '@/store/store';
 import '@/styles/reset.css';
-import { ReactElement } from 'react';
+import '@/styles/theme.css';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (

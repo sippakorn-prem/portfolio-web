@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { ReactElement } from 'react';
 
 interface ILayoutProps {
-  children?: ReactElement[];
+  children?: ReactElement | ReactElement[];
   title?: string;
   description?: string;
 }

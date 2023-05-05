@@ -1,31 +1,26 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import { ReactElement } from 'react';
 import Meta from '@/components/Meta';
+import ImportIcons from '@/components/ImportIcons';
 
 export default function Document(): ReactElement {
   return (
     <Html lang="en">
       <Head>
-        <Meta />
+        <meta charSet="UTF-8" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="author" content="@sippakorn-prem" />
+        <meta name="theme-color" content="#616161" media="(prefers-color-scheme: dark)" />
+        <meta name="robots" content="index, follow" />
         <link rel="manifest" href="/manifest.json" />
-        {[48, 96, 192, 256, 384, 512].map(LinkIcon)}
+
+        <Meta />
+        <ImportIcons />
       </Head>
-      <body className="body-container">
+      <body>
         <Main />
         <NextScript />
       </body>
     </Html>
   );
 }
-
-const LinkIcon = (size: number): ReactElement => {
-  const sizes = `${size}x${size}`;
-  const href = `/icons/icon${sizes}.png`;
-  return (
-    <>
-      <link key={size} rel="icon" type="image/png" sizes={sizes} href={href} />
-      <link rel="apple-touch-icon" sizes={sizes} href={href} />
-      <link rel="apple-touch-startup-image" href={href} />
-    </>
-  );
-};

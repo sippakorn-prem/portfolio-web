@@ -8,7 +8,7 @@ export default function Document(): ReactElement {
       <Head>
         <Meta />
         <link rel="manifest" href="/manifest.json" />
-        {[16, 24, 32, 48, 64, 96, 128, 256, 512].map(LinkIcon)}
+        {[48, 96, 192, 256, 384, 512].map(LinkIcon)}
       </Head>
       <body className="body-container">
         <Main />
@@ -20,7 +20,7 @@ export default function Document(): ReactElement {
 
 const LinkIcon = (size: number): ReactElement => {
   const sizes = `${size}x${size}`;
-  const href = `/icons/${size}.png`;
+  const href = `/icons/icon${sizes}.png`;
   return (
     <>
       <link key={size} rel="icon" type="image/png" sizes={sizes} href={href} />

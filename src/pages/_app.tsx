@@ -35,11 +35,12 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
         <meta charSet="UTF-8" />
         <meta
           name="viewport"
-          content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          content="height=device-height, width=device-width, initial-scale=1.0"
         />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="author" content="@sippakorn-prem" />
-        <meta name="theme-color" content="#212121" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#616161" media="(prefers-color-scheme: dark)" />
+        <meta name="robots" content="index, follow" />
       </Head>
       <Background />
       <Component {...pageProps} />

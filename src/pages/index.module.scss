@@ -1,4 +1,4 @@
-section.background {
+.background {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -20,22 +20,6 @@ section.background {
     align-content: center;
     min-height: 100vh;
     box-sizing: border-box;
-
-    .hidden {
-      opacity: 0;
-      filter: blur(10px);
-      transition: all 1s ease-in-out;
-      padding: 48px;
-      border-radius: 45px;
-      background: #757575;
-      box-shadow: 50px 50px 100px #636363, -50px -50px 100px #878787;
-
-      &.show {
-        opacity: 1;
-        filter: blur(0);
-
-        // &:first-child { transition-delay: 4s; }
-      }
-    }
+    font-weight: 500;
   }
 }

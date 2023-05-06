@@ -1,20 +1,29 @@
 import styles from './Logo.module.scss';
-import { setIntesectionObserver } from '@/utils';
-import { ReactElement, useEffect } from 'react';
+import anime, { AnimeInstance } from 'animejs';
+import { ReactElement, useEffect, useRef } from 'react';
 
 interface Props {
   fill: string;
 }
 
 export default function Logo(props: Props): ReactElement {
+  const animationRef = useRef<AnimeInstance | null>(null);
+
   const pathProps = {
     stroke: props.fill,
-    strokeWidth: 3,
+    strokeWidth: 2,
     fill: 'none',
   };
 
   useEffect(() => {
-    setIntesectionObserver(styles.show, styles.logo);
+    animationRef.current = anime({
+      targets: `.${styles.logo} svg path`,
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: 'easeInOutSine',
+      duration: 2000,
+      delay: (el: HTMLElement, i: number) => i * 250,
+      direction: 'forwards',
+    });
   }, []);
 
   return (

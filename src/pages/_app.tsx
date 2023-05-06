@@ -1,11 +1,18 @@
-import styles from '@/styles/theme.module.scss';
 import '@/styles/reset.css';
+import '@/styles/theme.css';
 import Head from 'next/head';
 import store from '@/store/store';
 import Header from '@/components/Header';
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import { ReactElement, useEffect } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Quicksand, Roboto, sans-serif',
+  },
+});
 
 function displayAsciiArtInConsole(): void {
   const asciiArt = `
@@ -28,16 +35,18 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 
   return (
     <Provider store={store}>
-      <Head>
-        <meta
-          name="viewport"
-          content="height=device-height, width=device-width, initial-scale=1.0"
-        />
-      </Head>
-      <div className={styles.body}>
-        <Header />
-        <Component {...pageProps} />
-      </div>
+      <ThemeProvider theme={theme}>
+        <Head>
+          <meta
+            name="viewport"
+            content="height=device-height, width=device-width, initial-scale=1.0"
+          />
+        </Head>
+        <div className="body">
+          <Header />
+          <Component {...pageProps} />
+        </div>
+      </ThemeProvider>
     </Provider>
   );
 }

@@ -14,12 +14,27 @@
     z-index: -1;
   }
 
-  .paragraph {
+  .paragraphWrapper {
     display: grid;
+    position: relative;
     place-items: center;
     align-content: center;
     min-height: 100vh;
     box-sizing: border-box;
     font-weight: 500;
+
+    .line {
+      display: inline-block;
+      font-weight: 300;
+      transform: translateX(-10px);
+    }
+
+    .name {
+      font-weight: 500;
+    }
+    
+    .position {
+      font-weight: 300;
+    }
   }
 }

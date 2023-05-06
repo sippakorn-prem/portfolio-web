@@ -1,6 +1,8 @@
+import styles from './Background.module.scss';
 import { ReactElement, useEffect } from 'react';
+import { brown } from '@mui/material/colors';
 import BackgroundAudio from './BackgroundAudio';
-import styles from '@/styles/components/Background.module.scss';
+import Logo from './Logo';
 
 async function testAudio(): Promise<void> {
   const res = await fetch(
@@ -27,6 +29,9 @@ const filterData = (audioBuffer: AudioBuffer): number[] => {
 export default function Background(): ReactElement {
   return (
     <section className={styles.background}>
+      <div className={styles.topLeftLogo}>
+        <Logo fill={brown[300]} />
+      </div>
       {/* <BackgroundAudio /> */}
       {/* <img alt="background" src="/background.png" /> */}
     </section>

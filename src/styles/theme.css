@@ -1,5 +1,4 @@
-body.body-container {
+.body {
   min-height: 100vh;
-  background-color: #757575;
-  /* background: linear-gradient(#212121, #263238); */
+  background-color: #efebe9;
 }

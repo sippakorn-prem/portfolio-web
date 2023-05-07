@@ -1,3 +1,5 @@
+@use '@/styles/globals' as *;
+
 .wrapper {
   @include fullPageContent;
 

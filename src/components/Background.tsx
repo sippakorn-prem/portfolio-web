@@ -3,6 +3,7 @@ import { ReactElement, useEffect } from 'react';
 import { brown } from '@mui/material/colors';
 import BackgroundAudio from './BackgroundAudio';
 import Logo from './Logo';
+import Layout from './Layout';
 
 async function testAudio(): Promise<void> {
   const res = await fetch(
@@ -28,12 +29,10 @@ const filterData = (audioBuffer: AudioBuffer): number[] => {
 
 export default function Background(): ReactElement {
   return (
-    <section className={styles.background}>
+    <Layout>
       <div className={styles.topLeftLogo}>
         <Logo fill={brown[300]} />
       </div>
-      {/* <BackgroundAudio /> */}
-      {/* <img alt="background" src="/background.png" /> */}
-    </section>
+    </Layout>
   );
 }

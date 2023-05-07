@@ -6,13 +6,23 @@ import Header from '@/components/Header';
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import { ReactElement, useEffect } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { Container, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
+import { brown, grey } from '@mui/material/colors';
 
-const theme = createTheme({
-  typography: {
-    fontFamily: 'Quicksand, Roboto, sans-serif',
-  },
-});
+const theme = responsiveFontSizes(
+  createTheme({
+    components: {
+      MuiTypography: {
+        defaultProps: {
+          color: grey[800],
+        },
+      },
+    },
+    typography: {
+      fontFamily: 'Quicksand, Roboto, sans-serif',
+    },
+  })
+);
 
 function displayAsciiArtInConsole(): void {
   const asciiArt = `
@@ -25,8 +35,8 @@ function displayAsciiArtInConsole(): void {
 
   console.log(
     `\n\n%c${asciiArt}\n\n%cGenerate by fsymbols\n\n`,
-    'color: #607d8b;',
-    'color: #607d8b;font-size: 14px;'
+    `color: ${brown[300]};`,
+    `color: ${brown[300]};font-size: 14px;`
   );
 }
 
@@ -42,10 +52,10 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
             content="height=device-height, width=device-width, initial-scale=1.0"
           />
         </Head>
-        <div className="body">
+        <Container>
           <Header />
           <Component {...pageProps} />
-        </div>
+        </Container>
       </ThemeProvider>
     </Provider>
   );

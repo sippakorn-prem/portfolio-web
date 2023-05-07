@@ -16,7 +16,7 @@ export default function IntroSplashScreen({ onComplete }: Props): ReactElement {
     const nameWidth =
       document?.querySelector(`${wrapper} .${styles.name}`)?.getBoundingClientRect()?.width ?? 0;
     const instance = anime
-      .timeline({ delay: 2000 })
+      .timeline({ delay: 1000 })
       .add({
         targets: line,
         scaleY: [0, 1],
@@ -62,6 +62,7 @@ export default function IntroSplashScreen({ onComplete }: Props): ReactElement {
       });
     await instance.finished;
     onComplete();
+    document.querySelector(`.${styles.wrapper}`)?.classList.add(styles.snap);
   }
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function IntroSplashScreen({ onComplete }: Props): ReactElement {
           ))}
         </Typography>
       </div>
-      <Typography className={styles.position} variant="h4">
+      <Typography className={styles.position} variant="h4" align="center">
         {'Software Developer'.split('').map((letter, i) => (
           <span key={i}>{letter}</span>
         ))}

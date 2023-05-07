@@ -3,14 +3,20 @@ import { ReactElement, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import anime from 'animejs';
 
-export default function IntroSplashScreen(): ReactElement {
-  useEffect(() => {
+interface Props {
+  onComplete: () => void;
+}
+
+export default function IntroSplashScreen({ onComplete }: Props): ReactElement {
+  async function initAnimation(): Promise<void> {
     const wrapper = `.${styles.wrapper}`;
     const line = `${wrapper} .${styles.nameWrapper} .${styles.line}`;
     const name = `${wrapper} .${styles.name} span`;
     const position = `${wrapper} .${styles.position} span`;
-    anime
-      .timeline({ delay: 1000 })
+    const nameWidth =
+      document?.querySelector(`${wrapper} .${styles.name}`)?.getBoundingClientRect()?.width ?? 0;
+    const instance = anime
+      .timeline({ delay: 2000 })
       .add({
         targets: line,
         scaleY: [0, 1],
@@ -20,11 +26,7 @@ export default function IntroSplashScreen(): ReactElement {
       })
       .add({
         targets: line,
-        translateX: [
-          -10,
-          (document?.querySelector(`${wrapper} .${styles.name}`)?.getBoundingClientRect()?.width ??
-            0) + 10,
-        ],
+        translateX: nameWidth + 24,
         easing: 'easeOutExpo',
         duration: 700,
         delay: 100,
@@ -37,7 +39,7 @@ export default function IntroSplashScreen(): ReactElement {
           duration: 600,
           delay: (el, i) => 20 * (i + 1),
         },
-        '-=775'
+        '-=800'
       )
       .add(
         {
@@ -47,27 +49,30 @@ export default function IntroSplashScreen(): ReactElement {
           easing: 'easeOutExpo',
           duration: 700,
         },
-        '-=300'
+        '-=500'
       )
-      .add(
-        {
-          targets: position,
-          translateX: [40, 0],
-          translateZ: 0,
-          opacity: [0, 1],
-          easing: 'easeOutExpo',
-          duration: 1200,
-          delay: (el, i) => 500 + 30 * i,
-        },
-        '-=450'
-      );
+      .add({
+        targets: position,
+        translateX: [40, 0],
+        translateZ: 0,
+        opacity: [0, 1],
+        easing: 'easeOutExpo',
+        duration: 1200,
+        delay: (el, i) => 30 * i,
+      });
+    await instance.finished;
+    onComplete();
+  }
+
+  useEffect(() => {
+    initAnimation();
   }, []);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.nameWrapper}>
         <div className={styles.line} />
-        <Typography className={styles.name} variant="h2">
+        <Typography className={styles.name} variant="h2" align="center">
           {'Sippakorn Suphapinyo'.split('').map((letter, i) => (
             <span key={i}>{letter}</span>
           ))}

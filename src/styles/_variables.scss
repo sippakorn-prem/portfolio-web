@@ -1,0 +1,8 @@
+@mixin fullPageContent {
+  display: grid;
+  position: relative;
+  place-items: center;
+  align-content: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}

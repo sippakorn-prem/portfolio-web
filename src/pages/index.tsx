@@ -7,7 +7,14 @@ export default function Home(): ReactElement {
   return (
     <Layout>
       <div className={styles.container}>
-        <IntroSplashScreen />
+        <IntroSplashScreen
+          onComplete={() => {
+            console.log('  DONEEEE');
+          }}
+        />
+        <div className={styles.wrapper}>
+          <h1>Test</h1>
+        </div>
       </div>
     </Layout>
   );

@@ -6,7 +6,6 @@ import { RootState, UserState } from '@/store/store.interface';
 import { selectUserName, selectUserEmail } from '@/store/selectors';
 import { ReactElement } from 'react';
 import { TextField } from '@mui/material';
-import { Textarea as JoyTextarea, Input as JoyInput } from '@mui/joy';
 
 interface Props {
   user: UserState;
@@ -25,12 +24,6 @@ function MyComponent({ user, updateUserName, updateUserEmail }: Props): ReactEle
 
   return (
     <div>
-      <JoyTextarea
-        placeholder="Type in here…"
-        defaultValue="Try to put text longer than 4 lines."
-        minRows={2}
-        maxRows={4}
-      />
       <TextField
         label="Username"
         variant="outlined"
@@ -44,7 +37,6 @@ function MyComponent({ user, updateUserName, updateUserEmail }: Props): ReactEle
         value={user.email}
         onChange={handleEmailChange}
       />
-      <JoyInput placeholder="test" />
     </div>
   );
 }

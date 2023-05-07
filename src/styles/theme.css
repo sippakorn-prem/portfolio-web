@@ -1,4 +1,13 @@
-.body {
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+html.isLoading {
+  overflow: hidden;
+}
+
+body {
   min-height: 100vh;
   background-color: #efebe9;
 }

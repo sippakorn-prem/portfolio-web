@@ -1,0 +1,19 @@
+$text-color: #424242;
+
+@mixin fullPageContent {
+  display: grid;
+  position: relative;
+  place-items: center;
+  align-content: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+@mixin snapScroll {
+  scroll-snap-align: center;
+  // scroll-snap-stop: always;
+}
+
+@mixin translateDefault {
+  transform: translateX(0) translateY(0) translateZ(0);
+}

@@ -5,7 +5,7 @@ import ImportIcons from '@/components/ImportIcons';
 
 export default function Document(): ReactElement {
   return (
-    <Html lang="en">
+    <Html lang="en" className="isLoading">
       <Head>
         <meta charSet="UTF-8" />
         <meta name="mobile-web-app-capable" content="yes" />

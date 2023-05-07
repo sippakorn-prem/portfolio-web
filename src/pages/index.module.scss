@@ -1,40 +1,15 @@
-.background {
+.container {
   position: relative;
   width: 100%;
   min-height: 100vh;
 
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 60%;
-    z-index: -1;
-  }
-
-  .paragraphWrapper {
-    display: grid;
-    position: relative;
-    place-items: center;
-    align-content: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-    font-weight: 500;
-
-    .line {
-      display: inline-block;
-      font-weight: 300;
-      transform: translateX(-10px);
-    }
-
-    .name {
-      font-weight: 500;
-    }
+  .wrapper {
+    @include fullPageContent;
     
-    .position {
-      font-weight: 300;
+    &.snap { @include snapScroll; }
+
+    h1 {
+      transition: .5s cubic-bezier(0, 1.27, .83, .67);
     }
   }
 }

@@ -1,84 +1,74 @@
+import IntroSplashScreen from '@/components/IntroSplashScreen';
 import styles from './index.module.scss';
 import Layout from '@/components/Layout';
 import { ReactElement, useEffect } from 'react';
+import { setIntesectionObserver } from '@/utils';
 import { Typography } from '@mui/material';
-import anime from 'animejs';
 
 export default function Home(): ReactElement {
+  function onDoneSplashScreen(): void {
+    document.querySelector('html')?.classList.remove('isLoading');
+    scrollTo(0, window.innerHeight);
+    document
+      .querySelectorAll(`.${styles.wrapper}`)
+      ?.forEach((el: Element) => el?.classList.add(styles.snap));
+  }
+
+  function initEventListener(): void {
+    window.addEventListener('mousemove', (event: MouseEvent) => {
+      const nameEl = document.querySelector<HTMLElement>(`.${styles.wrapper} h1`);
+      // const positionEl = document.querySelector<HTMLElement>(`.${styles.position}`);
+      const xValue = window.innerWidth / 2 - event.clientX;
+      const yValue = window.innerHeight / 2 - event.clientY;
+      setTransform(nameEl, xValue, yValue);
+      // setTransform(positionEl, xValue, yValue);
+    });
+  }
+
+  function setTransform(el: HTMLElement | null, xValue: number, yValue: number): void {
+    if (el?.style) {
+      el.style.transform = `${getTranslateX(el, xValue)} ${getTranslateY(el, yValue)}`;
+    }
+  }
+
+  function getTranslateX(el: HTMLElement | null, value: number): string {
+    const speed = parseFloat(el?.dataset?.speedX || '1');
+    return `translateX(${value * speed}px)`;
+  }
+
+  function getTranslateY(el: HTMLElement, value: number): string {
+    const speed = parseFloat(el?.dataset?.speedY || '1');
+    return `translateY(${value * speed}px)`;
+  }
+
   useEffect(() => {
-    const wrapper = `.${styles.background} .${styles.paragraphWrapper}`;
-    const line = `${wrapper} .${styles.name} .${styles.line}`;
-    const name = `${wrapper} .${styles.name} span`;
-    const position = `${wrapper} .${styles.position} span`;
-    anime
-      .timeline({ delay: 1000 })
-      .add({
-        targets: line,
-        scaleY: [0, 1],
-        opacity: [0, 1],
-        easing: 'easeOutExpo',
-        duration: 700,
-      })
-      .add({
-        targets: line,
-        translateX: [
-          -10,
-          (document?.querySelector(`${wrapper} .${styles.name}`)?.getBoundingClientRect()?.width ??
-            0) + 10,
-        ],
-        easing: 'easeOutExpo',
-        duration: 700,
-        delay: 100,
-      })
-      .add(
-        {
-          targets: name,
-          opacity: [0, 1],
-          easing: 'easeOutExpo',
-          duration: 600,
-          delay: (el, i) => 20 * (i + 1),
-        },
-        '-=775'
-      )
-      .add(
-        {
-          targets: line,
-          scaleY: [1, 0],
-          opacity: [1, 0],
-          easing: 'easeOutExpo',
-          duration: 700,
-        },
-        '-=300'
-      )
-      .add(
-        {
-          targets: position,
-          translateX: [40, 0],
-          translateZ: 0,
-          opacity: [0, 1],
-          easing: 'easeOutExpo',
-          duration: 1200,
-          delay: (el, i) => 500 + 30 * i,
-        },
-        '-=450'
-      );
+    scrollTo(0, 0);
+    setIntesectionObserver({
+      observeSelector: `.${styles.wrapper} .test`,
+      callback: () => {
+        console.log('123123 123 123 ');
+      },
+    });
+    initEventListener();
   }, []);
 
   return (
     <Layout>
-      <div className={styles.background}>
-        <div className={styles.paragraphWrapper}>
-          <Typography className={styles.name} variant="h2">
-            <div className={styles.line}>|</div>
-            {'Sippakorn Suphapinyo'.split('').map((letter, i) => (
-              <span key={i}>{letter}</span>
-            ))}
+      <div className={styles.container}>
+        <IntroSplashScreen onComplete={onDoneSplashScreen} />
+        <div className={styles.wrapper}>
+          <Typography variant="h1" data-speed-x="0.03" data-speed-y="0.03">
+            About me
           </Typography>
-          <Typography className={styles.position} variant="h4">
-            {'Software Developer'.split('').map((letter, i) => (
-              <span key={i}>{letter}</span>
-            ))}
-          </Typography>
+        </div>
+        <div className={styles.wrapper}>
+          <Typography variant="h1">Experence</Typography>
+        </div>
+        <div className={styles.wrapper}>
+          <Typography variant="h1">Skill</Typography>
+        </div>
+        <div className={styles.wrapper}>
+          <Typography variant="h1">Contact</Typography>
         </div>
       </div>
     </Layout>

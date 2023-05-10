@@ -8,10 +8,12 @@ import { Typography } from '@mui/material';
 export default function Home(): ReactElement {
   function onDoneSplashScreen(): void {
     document.querySelector('html')?.classList.remove('isLoading');
-    scrollTo(0, window.innerHeight);
     document
       .querySelectorAll(`.${styles.wrapper}`)
       ?.forEach((el: Element) => el?.classList.add(styles.snap));
+    setTimeout(() => {
+      scrollTo(0, window.innerHeight);
+    }, 1000);
   }
 
   function initEventListener(): void {

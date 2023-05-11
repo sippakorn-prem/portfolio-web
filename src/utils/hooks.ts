@@ -12,3 +12,10 @@ export function useIsMounted(): MutableRefObject<boolean> {
 
   return isMounted;
 }
+
+export function useScrollPosition(callback: () => void): void {
+  useEffect(() => {
+    window.addEventListener('scroll', callback);
+    return () => window.removeEventListener('scroll', callback);
+  }, []);
+}

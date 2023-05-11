@@ -1,0 +1,17 @@
+@use '@/styles/globals' as *;
+
+.wrapper {
+  position: relative;
+  padding: 5vh;
+
+  .title {
+    font-weight: 600;
+    transition: all .5s cubic-bezier(0, 1.27, .83, .67);
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    scale: 2;
+    color: $text-grey-color;
+  }
+}

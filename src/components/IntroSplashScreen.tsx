@@ -1,7 +1,7 @@
 import styles from './IntroSplashScreen.module.scss';
+import anime from 'animejs';
 import { ReactElement, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import anime from 'animejs';
 import { useIsMounted } from '@/utils/hooks';
 
 async function initAnimation(): Promise<void> {
@@ -11,52 +11,52 @@ async function initAnimation(): Promise<void> {
   const position = `${wrapper} .${styles.position} span`;
   const nameWidth =
     document?.querySelector(`${wrapper} .${styles.name}`)?.getBoundingClientRect()?.width ?? 0;
-  const instance = anime
-    .timeline({ delay: 1000 })
-    .add({
-      targets: line,
-      scaleY: [0, 1],
-      opacity: [0, 1],
-      easing: 'easeOutExpo',
-      duration: 700,
-    })
-    .add({
-      targets: line,
-      translateX: nameWidth + 24,
-      easing: 'easeOutExpo',
-      duration: 700,
-      delay: 100,
-    })
-    .add(
-      {
-        targets: name,
-        opacity: [0, 1],
-        easing: 'easeOutExpo',
-        duration: 600,
-        delay: (el, i) => 20 * (i + 1),
-      },
-      '-=800'
-    )
-    .add(
-      {
-        targets: line,
-        scaleY: [1, 0],
-        opacity: [1, 0],
-        easing: 'easeOutExpo',
-        duration: 700,
-      },
-      '-=500'
-    )
-    .add({
-      targets: position,
-      translateX: [40, 0],
-      translateZ: 0,
-      opacity: [0, 1],
-      easing: 'easeOutExpo',
-      duration: 1200,
-      delay: (el, i) => 30 * i,
-    });
-  await instance.finished;
+  // const instance = anime
+  //   .timeline({ delay: 1000 })
+  //   .add({
+  //     targets: line,
+  //     scaleY: [0, 1],
+  //     opacity: [0, 1],
+  //     easing: 'easeOutExpo',
+  //     duration: 700,
+  //   })
+  //   .add({
+  //     targets: line,
+  //     translateX: nameWidth + 24,
+  //     easing: 'easeOutExpo',
+  //     duration: 700,
+  //     delay: 100,
+  //   })
+  //   .add(
+  //     {
+  //       targets: name,
+  //       opacity: [0, 1],
+  //       easing: 'easeOutExpo',
+  //       duration: 600,
+  //       delay: (el, i) => 20 * (i + 1),
+  //     },
+  //     '-=800'
+  //   )
+  //   .add(
+  //     {
+  //       targets: line,
+  //       scaleY: [1, 0],
+  //       opacity: [1, 0],
+  //       easing: 'easeOutExpo',
+  //       duration: 700,
+  //     },
+  //     '-=500'
+  //   )
+  //   .add({
+  //     targets: position,
+  //     translateX: [40, 0],
+  //     translateZ: 0,
+  //     opacity: [0, 1],
+  //     easing: 'easeOutExpo',
+  //     duration: 1200,
+  //     delay: (el, i) => 30 * i,
+  //   });
+  // await instance.finished;
   document.querySelector('html')?.classList.remove('isLoading');
 }
 

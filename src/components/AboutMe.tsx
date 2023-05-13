@@ -1,7 +1,12 @@
 import styles from './AboutMe.module.scss';
+import dynamic from 'next/dynamic';
 import { useScrollPosition } from '@/utils/hooks';
 import { Container, Typography } from '@mui/material';
 import { ReactElement } from 'react';
+
+const TextAnimation = dynamic(() => import('@/components/TextAnimation'), {
+  ssr: false,
+});
 
 export default function AboutMe(): ReactElement {
   useScrollPosition(() => {
@@ -20,9 +25,11 @@ export default function AboutMe(): ReactElement {
         About me
       </Typography>
       <Container>
-        <Typography variant="h3" align="center">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        </Typography>
+        <TextAnimation>
+          <Typography variant="h3">
+            Hi there, I'm <span className={styles.fontBold}>Prem</span>.
+          </Typography>
+        </TextAnimation>
       </Container>
     </div>
   );

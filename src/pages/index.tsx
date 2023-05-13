@@ -1,12 +1,12 @@
-import IntroSplashScreen from '@/components/IntroSplashScreen';
 import styles from './index.module.scss';
 import dynamic from 'next/dynamic';
-import Layout from '@/components/Layout';
-import AboutMe from '@/components/AboutMe';
 import { ReactElement, useEffect } from 'react';
-import { Typography } from '@mui/material';
 
-const TextAnimation = dynamic(() => import('@/components/TextAnimation'), {
+const Layout = dynamic(import('@/components/Layout'));
+const IntroSplashScreen = dynamic(import('@/components/IntroSplashScreen'));
+const AboutMe = dynamic(import('@/components/AboutMe'));
+const Typography = dynamic(import('@mui/material/Typography'));
+const TextAnimation = dynamic(import('@/components/TextAnimation'), {
   ssr: false,
 });
 

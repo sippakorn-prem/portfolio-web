@@ -1,9 +1,8 @@
 import styles from './TextAnimation.module.scss';
 import anime, { AnimeInstance } from 'animejs';
 import { v4 as uuidv4 } from 'uuid';
-import { ReactElement, useCallback, useEffect, useMemo } from 'react';
+import { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
 import { setIntesectionObserver } from '@/utils';
-import { useRef } from 'react';
 
 interface Props {
   children: ReactElement;
@@ -51,6 +50,7 @@ export default function TextAnimation(props: Props): ReactElement {
     const backDropElement = document?.querySelector<HTMLElement>(`#${uuid} .${styles.backDrop}`);
     const childrenElement = document?.querySelector<HTMLElement>(`#${uuid} #${styles.children}`);
     backDropElement?.classList?.remove?.(styles.reverse);
+    if (backDropElement?.style) backDropElement.style.width = '0%';
     if (childrenElement?.style) childrenElement.style.opacity = '0';
   }, []);
 

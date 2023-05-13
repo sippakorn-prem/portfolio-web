@@ -1,9 +1,10 @@
 import styles from './AboutMe.module.scss';
 import dynamic from 'next/dynamic';
 import { useScrollPosition } from '@/utils/hooks';
-import { Container, Typography } from '@mui/material';
 import { ReactElement } from 'react';
 
+const Container = dynamic(import('@mui/material/Container'));
+const Typography = dynamic(import('@mui/material/Typography'));
 const TextAnimation = dynamic(() => import('@/components/TextAnimation'), {
   ssr: false,
 });

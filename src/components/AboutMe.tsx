@@ -5,7 +5,7 @@ import { ReactElement } from 'react';
 
 const Container = dynamic(import('@mui/material/Container'));
 const Typography = dynamic(import('@mui/material/Typography'));
-const TextAnimation = dynamic(() => import('@/components/TextAnimation'), {
+const TextScrollAnimation = dynamic(() => import('@/components/TextScrollAnimation'), {
   ssr: false,
 });
 
@@ -26,11 +26,26 @@ export default function AboutMe(): ReactElement {
         About me
       </Typography>
       <Container>
-        <TextAnimation>
-          <Typography variant="h3">
+        <TextScrollAnimation>
+          <Typography variant="h3" gutterBottom>
             Hi there, I'm <span className={styles.fontBold}>Prem</span>.
           </Typography>
-        </TextAnimation>
+        </TextScrollAnimation>
+        <TextScrollAnimation>
+          <Typography variant="h3" gutterBottom>
+            I'm Software Developer.
+          </Typography>
+        </TextScrollAnimation>
+        <TextScrollAnimation>
+          <Typography variant="h3" gutterBottom>
+            I'm Javascript Enjoyer.
+          </Typography>
+        </TextScrollAnimation>
+        <TextScrollAnimation>
+          <Typography variant="h3" gutterBottom>
+            I'm Valorant Player.
+          </Typography>
+        </TextScrollAnimation>
       </Container>
     </div>
   );

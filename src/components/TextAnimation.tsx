@@ -5,7 +5,7 @@ import { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
 import { setIntesectionObserver } from '@/utils';
 
 interface Props {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }
 
 export default function TextAnimation(props: Props): ReactElement {

@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import { ReactElement, useEffect } from 'react';
-import { Container, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
 import { brown, grey } from '@mui/material/colors';
 
 const theme = responsiveFontSizes(
@@ -52,10 +52,8 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
             content="height=device-height, width=device-width, initial-scale=1.0"
           />
         </Head>
-        <Container>
-          <Header />
-          <Component {...pageProps} />
-        </Container>
+        <Header />
+        <Component {...pageProps} />
       </ThemeProvider>
     </Provider>
   );

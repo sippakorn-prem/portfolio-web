@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import Meta, { IMetaProps } from './Meta';
 
 interface Props extends IMetaProps {
-  title: string;
+  title?: string;
   children?: ReactElement | ReactElement[];
 }
 

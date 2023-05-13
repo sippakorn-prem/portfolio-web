@@ -1,0 +1,22 @@
+@use '@/styles/globals' as *;
+
+.wrapper {
+  position: relative;
+  width: fit-content;
+  margin: auto;
+
+  .backDrop {
+    width: 0%;
+    height: 100%;
+    position: absolute;
+    background-color: $bg-black;
+
+    &.reverse {
+      right: 0;
+    }
+  }
+
+  #children {
+    opacity: 0;
+  }
+}

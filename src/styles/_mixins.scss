@@ -1,15 +1,19 @@
-@mixin fullPageContent {
+@mixin centerContent {
   display: grid;
   position: relative;
   place-items: center;
   align-content: center;
-  min-height: 100vh;
   box-sizing: border-box;
 }
 
+@mixin fullPageContent {
+  @include centerContent;
+  min-height: 100vh;
+}
+
 @mixin snapScroll {
-  scroll-snap-align: center;
-  // scroll-snap-stop: always;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 @mixin translateDefault {

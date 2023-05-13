@@ -3,8 +3,6 @@
 .wrapper {
   @include fullPageContent;
 
-  &.snap { @include snapScroll; }
-
   .nameWrapper {
     position: relative;
     padding: 0 12px;

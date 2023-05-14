@@ -5,15 +5,23 @@ import { ReactElement, useCallback, useMemo } from 'react';
 
 interface Props {
   children: ReactElement | ReactElement[];
-  speed?: number;
 }
 
 export default function TextScrollAnimation(props: Props): ReactElement {
-  const { children, speed = 0.35 } = props;
+  const { children } = props;
   const uuid = useMemo(() => {
     const id = uuidv4();
     return `uuid${id.replace(/\-/g, '_')}`;
   }, []);
+  const isPortrait = useMemo(
+    () => window.innerHeight > window.innerWidth,
+    [window.innerHeight, window.innerWidth]
+  );
+  const isXs = useMemo(
+    () => (isPortrait ? window.innerWidth : window.innerHeight) <= 600,
+    [window.innerHeight, window.innerWidth]
+  );
+  const speed = isXs ? 0.8 : 0.35;
   const isIntersecting = useIntersection(`#${uuid}`);
 
   const handleBackdropAnimation = useCallback((): void => {

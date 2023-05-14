@@ -17,6 +17,11 @@ const theme = responsiveFontSizes(
           color: grey[800],
         },
       },
+      MuiUseMediaQuery: {
+        defaultProps: {
+          noSsr: true,
+        },
+      },
     },
     typography: {
       fontFamily: 'Quicksand, Roboto, sans-serif',

@@ -18,4 +18,10 @@
   .fontBold {
     font-weight: 600;
   }
+
+  .link {
+    font-weight: 600;
+    text-decoration: none;
+    color: $text-color;
+  }
 }

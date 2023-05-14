@@ -2,6 +2,7 @@ import styles from './AboutMe.module.scss';
 import dynamic from 'next/dynamic';
 import { useScrollPosition } from '@/utils/hooks';
 import { ReactElement } from 'react';
+import Link from 'next/link';
 
 const Container = dynamic(import('@mui/material/Container'));
 const Typography = dynamic(import('@mui/material/Typography'));
@@ -27,23 +28,30 @@ export default function AboutMe(): ReactElement {
       </Typography>
       <Container>
         <TextScrollAnimation>
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Hi there, I'm <span className={styles.fontBold}>Prem</span>.
           </Typography>
         </TextScrollAnimation>
         <TextScrollAnimation>
-          <Typography variant="h3" gutterBottom>
-            I'm Software Developer.
+          <Typography variant="h4" gutterBottom>
+            <span>I'm Software Developer who live in </span>
+            <Link
+              className={styles.link}
+              href="https://goo.gl/maps/pvwS3od7g6ZFeEQN8"
+              target="_blank"
+            >
+              Bangkok, Thailand.
+            </Link>
           </Typography>
         </TextScrollAnimation>
         <TextScrollAnimation>
-          <Typography variant="h3" gutterBottom>
-            I'm Javascript Enjoyer.
+          <Typography variant="h4" style={{ marginTop: '60vh' }} gutterBottom>
+            "A user interface is like a joke.
           </Typography>
         </TextScrollAnimation>
         <TextScrollAnimation>
-          <Typography variant="h3" gutterBottom>
-            I'm Valorant Player.
+          <Typography variant="h4" gutterBottom>
+            If you have to explain it, it’s not that good."
           </Typography>
         </TextScrollAnimation>
       </Container>

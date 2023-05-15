@@ -1,29 +1,21 @@
 // reducers.ts
 
 import { Reducer } from 'redux';
-import { UserState, UserActionTypes, UPDATE_USER_NAME, UPDATE_USER_EMAIL } from './store.interface';
+import { RootState, UpdateStateAction } from './store.interface';
 
-const initialUserState: UserState = {
-  name: 'John Doe',
-  email: 'john.doe@example.com',
+const initialState: RootState = {
+  scrollX: 0,
+  scrollY: 0,
+  innerHeight: 0,
+  innerWidth: 0,
 };
 
-export const userReducer: Reducer<UserState, UserActionTypes> = (
-  state = initialUserState,
+export const stateReducer: Reducer<RootState, UpdateStateAction> = (
+  state = initialState,
   action
 ) => {
-  switch (action.type) {
-    case UPDATE_USER_NAME:
-      return {
-        ...state,
-        name: action.payload,
-      };
-    case UPDATE_USER_EMAIL:
-      return {
-        ...state,
-        email: action.payload,
-      };
-    default:
-      return state;
-  }
+  return {
+    ...state,
+    [action.key]: action.value,
+  };
 };

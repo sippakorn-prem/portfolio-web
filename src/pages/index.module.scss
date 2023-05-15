@@ -4,12 +4,4 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-
-  .wrapper {
-    @include fullPageContent;
-
-    h1 {
-      transition: .5s cubic-bezier(0, 1.27, .83, .67);
-    }
-  }
 }

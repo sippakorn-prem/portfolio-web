@@ -13,13 +13,6 @@ export function useIsMounted(): MutableRefObject<boolean> {
   return isMounted;
 }
 
-export function useScrollPosition(callback: () => void, deps?: any[]): void {
-  useEffect(() => {
-    window.addEventListener('scroll', callback);
-    return () => window.removeEventListener('scroll', callback);
-  }, deps || []);
-}
-
 export function useIntersection(ref: string): boolean {
   const [isIntersecting, setIntersecting] = useState(false);
   useEffect(() => {

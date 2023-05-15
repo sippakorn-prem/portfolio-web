@@ -6,10 +6,11 @@ import { setIntesectionObserver } from '@/utils';
 
 interface Props {
   children: ReactElement | ReactElement[];
+  trigger?: boolean;
 }
 
 export default function TextAnimation(props: Props): ReactElement {
-  const { children } = props;
+  const { children, trigger } = props;
   const uuid = useMemo(() => {
     const id = uuidv4();
     return `uuid${id.replace(/\-/g, '_')}`;
@@ -55,13 +56,20 @@ export default function TextAnimation(props: Props): ReactElement {
   }, []);
 
   useEffect(() => {
-    setIntesectionObserver({
-      observeSelector: `#${uuid}`,
-      callback: (entry) => {
-        if (entry.isIntersecting) initAnimation();
-        else resetAnimation();
-      },
-    });
+    if (trigger) initAnimation();
+    else resetAnimation();
+  }, [trigger]);
+
+  useEffect(() => {
+    if (!trigger) {
+      setIntesectionObserver({
+        observeSelector: `#${uuid}`,
+        callback: (entry) => {
+          if (entry.isIntersecting) initAnimation();
+          else resetAnimation();
+        },
+      });
+    }
   }, []);
 
   return (

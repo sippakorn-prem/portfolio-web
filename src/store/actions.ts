@@ -1,13 +1,7 @@
-// actions.ts
+import { RootState, UpdateStateAction } from './store.interface';
 
-import { UPDATE_USER_NAME, UPDATE_USER_EMAIL, UserActionTypes } from './store.interface';
-
-export const updateUserName = (name: string): UserActionTypes => ({
-  type: UPDATE_USER_NAME,
-  payload: name,
-});
-
-export const updateUserEmail = (email: string): UserActionTypes => ({
-  type: UPDATE_USER_EMAIL,
-  payload: email,
+export const updateState = (key: keyof RootState, value: any): UpdateStateAction => ({
+  type: 'UPDATE_STATE',
+  key,
+  value,
 });

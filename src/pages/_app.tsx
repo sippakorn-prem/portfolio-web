@@ -2,12 +2,14 @@ import '@/styles/reset.css';
 import '@/styles/theme.css';
 import Head from 'next/head';
 import store from '@/store/store';
-import Header from '@/components/Header';
+import dynamic from 'next/dynamic';
 import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import { ReactElement, useEffect } from 'react';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
 import { brown, grey } from '@mui/material/colors';
+
+const SetBackgroundState = dynamic(() => import('@/components/SetBackgroundState'));
 
 const theme = responsiveFontSizes(
   createTheme({
@@ -57,7 +59,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
             content="height=device-height, width=device-width, initial-scale=1.0"
           />
         </Head>
-        <Header />
+        <SetBackgroundState />
         <Component {...pageProps} />
       </ThemeProvider>
     </Provider>

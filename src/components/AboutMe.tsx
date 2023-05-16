@@ -1,8 +1,9 @@
 import { RootState } from '@/store/store.interface';
 import styles from './AboutMe.module.scss';
 import dynamic from 'next/dynamic';
-import { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Link = dynamic(import('next/link'));
 const Container = dynamic(import('@mui/material/Container'));
@@ -10,39 +11,37 @@ const Typography = dynamic(import('@mui/material/Typography'));
 const TextAnimation = dynamic(() => import('@/components/TextAnimation'), {
   ssr: false,
 });
-const TextScrollAnimation = dynamic(() => import('@/components/TextScrollAnimation'), {
-  ssr: false,
-});
 
 export default function AboutMe(): ReactElement {
   const state = useSelector((state: RootState) => state);
-
-  useEffect(() => {
-    const frame = document.querySelector<HTMLElement>(`.${styles.frame}`);
-    const fixedTitle = document.querySelector<HTMLElement>(`.${styles.fixedTitle}`);
-    const initFrame = state.scrollY >= innerHeight / 2;
-    frame?.classList[initFrame ? 'add' : 'remove'](styles.appear);
-    fixedTitle?.classList[initFrame ? 'add' : 'remove'](styles.appear);
-  }, [state.scrollY]);
+  const onEntered = state.scrollY >= state.innerHeight / 3;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.frame}>
-        <TextAnimation trigger={state.scrollY >= 500}>
-          <Typography className={styles.fontBold} variant="h2">
-            About me
-          </Typography>
-        </TextAnimation>
-      </div>
+    <motion.div className={styles.wrapper}>
+      <AnimatePresence>
+        {onEntered && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.frame}
+          >
+            <TextAnimation style={{ marginLeft: 0 }}>
+              <Typography className={styles.fontBold} variant="h2">
+                About me
+              </Typography>
+            </TextAnimation>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Container>
-        <div style={{ height: '30vh' }} />
-        <TextScrollAnimation>
-          <Typography variant="h4" gutterBottom>
+        <TextAnimation>
+          <Typography className={styles.sentence} variant="h4" align="center">
             Hi there, I'm <span className={styles.fontBold}>Prem</span>.
           </Typography>
-        </TextScrollAnimation>
-        <TextScrollAnimation>
-          <Typography variant="h4" gutterBottom>
+        </TextAnimation>
+        <TextAnimation>
+          <Typography className={styles.sentence} variant="h4" align="center">
             <span>I'm Software Developer who live in </span>
             <Link
               className={styles.link}
@@ -52,19 +51,15 @@ export default function AboutMe(): ReactElement {
               Bangkok, Thailand.
             </Link>
           </Typography>
-        </TextScrollAnimation>
-        <TextScrollAnimation>
-          <Typography variant="h4" style={{ marginTop: '60vh' }} gutterBottom>
-            "A user interface is like a joke.
+        </TextAnimation>
+        <TextAnimation>
+          <Typography className={styles.sentence} variant="h4" align="center">
+            <span>"A user interface is like a joke.</span>
+            <br />
+            <span>If you have to explain it, it’s not that good."</span>
           </Typography>
-        </TextScrollAnimation>
-        <TextScrollAnimation>
-          <Typography variant="h4" gutterBottom>
-            If you have to explain it, it’s not that good."
-          </Typography>
-        </TextScrollAnimation>
+        </TextAnimation>
       </Container>
-      <div style={{ height: '300vh' }} />
-    </div>
+    </motion.div>
   );
 }

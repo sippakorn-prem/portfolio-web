@@ -12,11 +12,11 @@
     top: 0;
     left: 0;
     padding: 40px;
-    transition: all .5s cubic-bezier(0, 1.27, .83, .67);
   }
 
-  .appear {
-    opacity: 1;
+  .sentence {
+    @include snapScroll;
+    margin: 100vh 0;
   }
 
   .fontBold {

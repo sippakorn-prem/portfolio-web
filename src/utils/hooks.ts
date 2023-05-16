@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
 export function useIsMounted(): MutableRefObject<boolean> {
   const isMounted = useRef(false);
@@ -11,14 +11,4 @@ export function useIsMounted(): MutableRefObject<boolean> {
   }, []);
 
   return isMounted;
-}
-
-export function useIntersection(ref: string): boolean {
-  const [isIntersecting, setIntersecting] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
-    const observeElement = document.querySelector(ref);
-    if (observeElement) observer.observe(observeElement);
-  }, []);
-  return isIntersecting;
 }

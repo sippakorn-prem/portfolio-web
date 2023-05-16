@@ -1,16 +1,17 @@
 import styles from './TextAnimation.module.scss';
 import anime, { AnimeInstance } from 'animejs';
 import { v4 as uuidv4 } from 'uuid';
-import { ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
-import { setIntesectionObserver } from '@/utils';
+import { CSSProperties, ReactElement, useCallback, useEffect, useMemo, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 interface Props {
   children: ReactElement | ReactElement[];
   trigger?: boolean;
+  style?: CSSProperties;
 }
 
 export default function TextAnimation(props: Props): ReactElement {
-  const { children, trigger } = props;
+  const { children, trigger, style } = props;
   const uuid = useMemo(() => {
     const id = uuidv4();
     return `uuid${id.replace(/\-/g, '_')}`;
@@ -55,27 +56,28 @@ export default function TextAnimation(props: Props): ReactElement {
     if (childrenElement?.style) childrenElement.style.opacity = '0';
   }, []);
 
+  function handleIntersection(entry: IntersectionObserverEntry | null): void {
+    if (!trigger) {
+      if (entry?.isIntersecting) initAnimation();
+      else resetAnimation();
+    }
+  }
+
   useEffect(() => {
     if (trigger) initAnimation();
     else resetAnimation();
   }, [trigger]);
 
-  useEffect(() => {
-    if (!trigger) {
-      setIntesectionObserver({
-        observeSelector: `#${uuid}`,
-        callback: (entry) => {
-          if (entry.isIntersecting) initAnimation();
-          else resetAnimation();
-        },
-      });
-    }
-  }, []);
-
   return (
-    <div id={uuid} className={styles.wrapper}>
+    <motion.div
+      id={uuid}
+      className={styles.wrapper}
+      style={style}
+      onViewportEnter={handleIntersection}
+      onViewportLeave={handleIntersection}
+    >
       <div className={styles.backDrop} />
       <div id={styles.children}>{children}</div>
-    </div>
+    </motion.div>
   );
 }

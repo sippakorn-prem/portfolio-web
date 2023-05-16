@@ -8,5 +8,5 @@ export interface RootState {
 export interface UpdateStateAction {
   type: 'UPDATE_STATE';
   key: keyof RootState;
-  value: any;
+  value: unknown;
 }

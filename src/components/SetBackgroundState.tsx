@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { updateState } from '@/store/actions';
 import { RootState } from '@/store/store.interface';

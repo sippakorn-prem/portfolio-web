@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import { Html, Head, Main, NextScript } from 'next/document';
 import { ReactElement } from 'react';
 
-const Meta = dynamic(() => import('@/components/Meta'));
 const ImportIcons = dynamic(() => import('@/components/ImportIcons'));
 
 export default function Document(): ReactElement {
@@ -21,8 +20,6 @@ export default function Document(): ReactElement {
           href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-
-        <Meta />
         <ImportIcons />
       </Head>
       <body>

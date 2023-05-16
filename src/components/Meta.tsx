@@ -1,4 +1,3 @@
-import { Head } from 'next/document';
 import { ReactElement } from 'react';
 
 type key =
@@ -56,9 +55,12 @@ const defaultKeywords = [
 
 Meta.defaultProps = {
   keywords: defaultKeywords.join(','),
-  description: "I'm Sippakorn Suphapinyo (Prem)",
-  ogTitle: 'Prem Sippakorn',
-  ogDescription: "I'm Sippakorn Suphapinyo (Prem)",
+  description:
+    "Hi there, I'm Prem Sippakorn Suphapinyo. I'm Software Developer who live in Bangkok, Thailand.",
+  ogTitle: 'Sippakorn Suphapinyo',
+  ogDescription:
+    "Hi there, I'm Prem Sippakorn Suphapinyo. I'm Software Developer who live in Bangkok, Thailand.",
   ogUrl: 'https://sippakorn.page/',
-  ogImage: '/og-image.png',
+  ogImage: '/assets/images/og-image.png',
+  ogType: 'website',
 };

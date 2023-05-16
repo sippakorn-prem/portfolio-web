@@ -20,6 +20,7 @@
     "animejs": "^3.2.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "framer-motion": "^10.12.11",
     "next": "13.3.0",
     "next-pwa": "^5.6.0",
     "next-redux-wrapper": "^8.1.0",

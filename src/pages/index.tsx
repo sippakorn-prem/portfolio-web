@@ -16,7 +16,6 @@ export default function Home(): ReactElement {
       <div className={styles.container}>
         <IntroSplashScreen />
         <AboutMe />
-        <div style={{ height: '100vh' }} />
       </div>
     </Layout>
   );

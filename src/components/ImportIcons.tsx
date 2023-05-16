@@ -8,7 +8,7 @@ export default function ImportIcons(): ReactElement {
   }
 
   function getHref(size: number): string {
-    return `/icons/icon${getSizeBySize(size)}.png`;
+    return `/assets/icons/icon${getSizeBySize(size)}.png`;
   }
 
   return (
@@ -35,6 +35,10 @@ export default function ImportIcons(): ReactElement {
       {iconSizes.map((size) => (
         <link key={size} rel="apple-touch-icon" sizes={getSizeBySize(size)} href={getHref(size)} />
       ))}
+
+      <link rel="icon" href="/favicon.ico" />
+      <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+      <link rel="icon" type="image/png" href="/assets/icons/favicon.png" />
     </>
   );
 }

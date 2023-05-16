@@ -20,5 +20,5 @@ export default function Layout(props: Props): ReactElement {
 }
 
 Layout.defaultProps = {
-  title: 'Sippakorn.page',
+  title: 'Sippakorn Suphapinyo',
 };

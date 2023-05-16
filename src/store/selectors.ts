@@ -1,7 +1,7 @@
-// selectors.ts
+// // selectors.ts
 
-import { RootState, UserState } from './store.interface';
+// import { RootState, UserState } from './store.interface';
 
-export const selectUserName = (state: RootState): string => state.user.name;
+// export const selectUserName = (state: RootState): string => state.user.name;
 
-export const selectUserEmail = (state: RootState): string => state.user.email;
+// export const selectUserEmail = (state: RootState): string => state.user.email;

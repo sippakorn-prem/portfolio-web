@@ -21,12 +21,20 @@ export default function TextAnimation(props: Props): ReactElement {
   const initAnimation = useCallback(async () => {
     const backDropElement = document?.querySelector<HTMLElement>(`#${uuid} .${styles.backDrop}`);
     const childrenElement = document?.querySelector<HTMLElement>(`#${uuid} #${styles.children}`);
-    animation.current = anime({
-      targets: backDropElement,
-      width: '100%',
-      easing: 'easeInOutQuart',
-      duration: 500,
-    });
+    animation.current = anime
+      .timeline({})
+      .add({
+        targets: backDropElement,
+        opacity: [0, 1],
+        easing: 'easeOutExpo',
+        duration: 500,
+      })
+      .add({
+        targets: backDropElement,
+        width: '100%',
+        easing: 'easeInOutQuart',
+        duration: 500,
+      });
     await animation.current.finished;
     backDropElement?.classList.add(styles.reverse);
     animation.current = anime

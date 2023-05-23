@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import { AppProps } from 'next/app';
 import { ReactElement, useEffect } from 'react';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
-import { brown, grey } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
+import { motion, useScroll } from 'framer-motion';
 
 const SetBackgroundState = dynamic(() => import('@/components/SetBackgroundState'));
 
@@ -42,12 +43,13 @@ function displayAsciiArtInConsole(): void {
 
   console.log(
     `\n\n%c${asciiArt}\n\n%cGenerate by fsymbols\n\n`,
-    `color: ${brown[300]};`,
-    `color: ${brown[300]};font-size: 14px;`
+    `color: ${grey[300]};`,
+    `color: ${grey[300]};font-size: 14px;`
   );
 }
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
+  const { scrollYProgress } = useScroll();
   useEffect(displayAsciiArtInConsole, []);
 
   return (
@@ -59,6 +61,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
             content="height=device-height, width=device-width, initial-scale=1.0"
           />
         </Head>
+        <motion.div className="scroll-progress-bar" style={{ scaleX: scrollYProgress }} />
         <SetBackgroundState />
         <Component {...pageProps} />
       </ThemeProvider>

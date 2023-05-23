@@ -69,6 +69,7 @@ export default function AboutMe(): ReactElement {
               width={400}
               height={400}
               onLoad={(): void => setIsLoaded(true)}
+              priority
             />
           </motion.div>
           <TextAnimation>

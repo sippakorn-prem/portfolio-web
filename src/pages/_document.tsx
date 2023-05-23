@@ -6,12 +6,12 @@ const ImportIcons = dynamic(() => import('@/components/ImportIcons'));
 
 export default function Document(): ReactElement {
   return (
-    <Html lang="en" className="isLoading">
+    <Html lang="en">
       <Head>
         <meta charSet="UTF-8" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="author" content="@sippakorn-prem" />
-        <meta name="theme-color" content="#efebe9" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#fff8e1" media="(prefers-color-scheme: dark)" />
         <meta name="robots" content="index, follow" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

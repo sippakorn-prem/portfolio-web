@@ -2,13 +2,10 @@ import styles from './IntroSplashScreen.module.scss';
 import anime from 'animejs';
 import dynamic from 'next/dynamic';
 import { ReactElement, useCallback, useEffect } from 'react';
-import { useIsMounted } from '@/utils/hooks';
 
 const Typography = dynamic(import('@mui/material/Typography'));
 
 export default function IntroSplashScreen(): ReactElement {
-  const isMounted = useIsMounted();
-
   const initAnimation = useCallback(async (): Promise<void> => {
     const wrapper = `.${styles.wrapper}`;
     const line = `${wrapper} .${styles.nameWrapper} .${styles.line}`;
@@ -17,7 +14,7 @@ export default function IntroSplashScreen(): ReactElement {
     const nameWidth =
       document?.querySelector(`${wrapper} .${styles.name}`)?.getBoundingClientRect()?.width ?? 0;
     const instance = anime
-      .timeline({})
+      .timeline({ delay: 100 })
       .add({
         targets: line,
         scaleY: [0, 1],
@@ -63,10 +60,13 @@ export default function IntroSplashScreen(): ReactElement {
       });
     await instance.finished;
     document.querySelector('html')?.classList.remove('isLoading');
+    setTimeout(() => {
+      scrollTo(0, window.innerHeight);
+    }, 1000);
   }, []);
 
   useEffect(() => {
-    if (isMounted?.current) initAnimation();
+    initAnimation();
   }, []);
 
   return (

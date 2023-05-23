@@ -1,6 +1,10 @@
 html {
-  /* scroll-behavior: smooth; */
+  scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 html.isLoading {
@@ -9,5 +13,16 @@ html.isLoading {
 
 body {
   min-height: 100vh;
-  background-color: #efebe9;
+  background-color: #fff8e1;
+}
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: #212121;
+  opacity: .8;
+  transform-origin: 0%;
 }

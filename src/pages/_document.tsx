@@ -11,7 +11,7 @@ export default function Document(): ReactElement {
         <meta charSet="UTF-8" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="author" content="@sippakorn-prem" />
-        <meta name="theme-color" content="#fff8e1" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: dark)" />
         <meta name="robots" content="index, follow" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

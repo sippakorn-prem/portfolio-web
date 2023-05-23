@@ -11,9 +11,20 @@ html.isLoading {
   overflow: hidden;
 }
 
+/* Night shift */
+html:before {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #ffa339;
+  opacity: .1;
+  pointer-events: none;
+  content: ' ';
+  z-index: 99999;
+}
+
 body {
   min-height: 100vh;
-  background-color: #fff8e1;
 }
 
 .scroll-progress-bar {

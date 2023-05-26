@@ -14,6 +14,7 @@ export const stateReducer: Reducer<RootState, UpdateStateAction> = (
   state = initialState,
   action
 ) => {
+  if (!action.key) return state;
   return {
     ...state,
     [action.key]: action.value,

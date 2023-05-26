@@ -1,10 +1,10 @@
-import { RootState } from '@/store/store.interface';
 import styles from './AboutMe.module.scss';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { RootState } from '@/store/store.interface';
 import { ReactElement, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
 
 const Link = dynamic(import('next/link'));
 const Container = dynamic(import('@mui/material/Container'));

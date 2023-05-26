@@ -5,6 +5,7 @@ import { ReactElement, useCallback, useEffect } from 'react';
 const Layout = dynamic(import('@/components/Layout'));
 const IntroSplashScreen = dynamic(import('@/components/IntroSplashScreen'));
 const AboutMe = dynamic(import('@/components/AboutMe'));
+const Skills = dynamic(import('@/components/Skills'));
 
 export default function Home(): ReactElement {
   const scrollToTop = useCallback(() => {
@@ -21,6 +22,9 @@ export default function Home(): ReactElement {
       <div className={styles.container}>
         <IntroSplashScreen />
         <AboutMe />
+        <Skills />
+        {/* Experiences */}
+        {/* Contact me */}
       </div>
     </Layout>
   );

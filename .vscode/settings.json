@@ -2,7 +2,7 @@
   "cSpell.words": [
   ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": ["javascript"],
   "editor.tabSize": 2

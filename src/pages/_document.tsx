@@ -1,8 +1,6 @@
+import ImportIcons from '@/components/ImportIcons';
 import { Head, Html, Main, NextScript } from 'next/document';
-import dynamic from 'next/dynamic';
 import { ReactElement } from 'react';
-
-const ImportIcons = dynamic(() => import('@/components/ImportIcons'));
 
 export default function Document(): ReactElement {
 	return (

@@ -24,15 +24,17 @@ type PartialRecord<K extends keyof any, T> = {
 
 export type MetaProps = PartialRecord<key, string>;
 
-export default function Meta({
-	keywords,
-	description,
-	ogTitle,
-	ogDescription,
-	ogUrl,
-	ogImage,
-	ogType,
-}: MetaProps): ReactElement {
+export default function Meta(props: MetaProps): ReactElement {
+	const {
+		keywords = DEFAULT_KEYWORDS.join(','),
+		description = DEFAULT_DESCRIPTION,
+		ogDescription = DEFAULT_DESCRIPTION,
+		ogImage = DEFAULT_OG_IMAGE,
+		ogTitle = MY_FULL_NAME,
+		ogType = 'website',
+		ogUrl = MY_PORTFOLIO_URL,
+	} = props;
+
 	return (
 		<>
 			<meta name="keywords" content={keywords} />
@@ -45,13 +47,3 @@ export default function Meta({
 		</>
 	);
 }
-
-Meta.defaultProps = {
-	keywords: DEFAULT_KEYWORDS.join(','),
-	description: DEFAULT_DESCRIPTION,
-	ogTitle: MY_FULL_NAME,
-	ogDescription: DEFAULT_DESCRIPTION,
-	ogType: 'website',
-	ogUrl: MY_PORTFOLIO_URL,
-	ogImage: DEFAULT_OG_IMAGE,
-};

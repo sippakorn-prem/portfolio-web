@@ -1,4 +1,5 @@
 import { DEFAULT_TITLE } from '@/common/constant';
+import { Container } from '@mui/material';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import Meta, { MetaProps } from './Meta';
@@ -15,7 +16,7 @@ export default function Layout(props: Props): ReactElement {
 				<Meta {...props} />
 				<title>{props.title || DEFAULT_TITLE}</title>
 			</Head>
-			<main>{props.children}</main>
+			<Container>{props.children}</Container>
 		</React.Fragment>
 	);
 }

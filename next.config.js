@@ -10,10 +10,9 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
-	reactStrictMode: true,
+	transpilePackages: ['geist'],
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'src/styles')],
-		prependData: `@use 'globals' as *;`,
 	},
 };
 

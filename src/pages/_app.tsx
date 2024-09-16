@@ -1,4 +1,8 @@
 import Meta from '@/components/Meta';
+import '@/styles/global.css';
+import '@/styles/reset.css';
+import '@/styles/tailwind.css';
+import { GeistSans } from 'geist/font/sans';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React, { ReactElement, useEffect } from 'react';
@@ -31,7 +35,9 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
 					content="height=device-height, width=device-width, initial-scale=1.0"
 				/>
 			</Head>
-			<Component {...pageProps} />
+			<main className={GeistSans.className}>
+				<Component {...pageProps} />
+			</main>
 		</React.Fragment>
 	);
 }
